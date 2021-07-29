@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.park.mapper.LineTableMapper" >
+  <resultMap id="BaseResultMap" type="com.park.pojo.LineTable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="line_parkName" property="lineParkname" jdbcType="VARCHAR" />
+    <result column="line_userName" property="lineUsername" jdbcType="VARCHAR" />
+    <result column="line_state" property="lineState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, line_parkName, line_userName, line_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.park.pojo.LineTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from line_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from line_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from line_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.park.pojo.LineTableExample" >
+    delete from line_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.park.pojo.LineTable" >
+    insert into line_table (id, line_parkName, line_userName, 
+      line_state)
+    values (#{id,jdbcType=INTEGER}, #{lineParkname,jdbcType=VARCHAR}, #{lineUsername,jdbcType=VARCHAR}, 
+      #{lineState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.park.pojo.LineTable" >
+    insert into line_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lineParkname != null" >
+        line_parkName,
+      </if>
+      <if test="lineUsername != null" >
+        line_userName,
+      </if>
+      <if test="lineState != null" >
+        line_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lineParkname != null" >
+        #{lineParkname,jdbcType=VARCHAR},
+      </if>
+      <if test="lineUsername != null" >
+        #{lineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="lineState != null" >
+        #{lineState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.park.pojo.LineTableExample" resultType="java.lang.Integer" >
+    select count(*) from line_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update line_table
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineParkname != null" >
+        line_parkName = #{record.lineParkname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineUsername != null" >
+        line_userName = #{record.lineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineState != null" >
+        line_state = #{record.lineState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update line_table
+    set id = #{record.id,jdbcType=INTEGER},
+      line_parkName = #{record.lineParkname,jdbcType=VARCHAR},
+      line_userName = #{record.lineUsername,jdbcType=VARCHAR},
+      line_state = #{record.lineState,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.park.pojo.LineTable" >
+    update line_table
+    <set >
+      <if test="lineParkname != null" >
+        line_parkName = #{lineParkname,jdbcType=VARCHAR},
+      </if>
+      <if test="lineUsername != null" >
+        line_userName = #{lineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="lineState != null" >
+        line_state = #{lineState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.park.pojo.LineTable" >
+    update line_table
+    set line_parkName = #{lineParkname,jdbcType=VARCHAR},
+      line_userName = #{lineUsername,jdbcType=VARCHAR},
+      line_state = #{lineState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
