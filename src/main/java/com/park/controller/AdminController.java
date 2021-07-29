@@ -29,7 +29,7 @@ public class AdminController {
     public String openparkground(){
         return "file";
     }
-
+//添加游乐场项目
     @RequestMapping("insert")
     public String insert(ParkTable parkTable, HttpSession session) throws IOException {
         String  filename = (String) session.getAttribute("file");
@@ -38,6 +38,7 @@ public class AdminController {
         session.removeAttribute("file");
         return "success";
     }
+    //上传图片
     @RequestMapping("insertfile")
     public String insertfile(MultipartFile parkFile, HttpSession session) throws IOException {
         String filepath = "D:\\ParkGround\\src\\main\\resources\\static\\dist\\img";
@@ -48,6 +49,7 @@ public class AdminController {
         session.setAttribute("file",newFileName);
         return "adminparkground";
     }
+    //显示游乐项目
 @RequestMapping("parklist")
 public String selectpark(Model model){
     List<ParkTable> selectpark = adminService.selectpark();

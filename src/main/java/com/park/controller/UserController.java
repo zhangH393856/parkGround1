@@ -51,12 +51,20 @@ public class UserController {
         session.setAttribute("parkName",parkName);
         return "insertfriend";
     }
-
+//添加好友
     @RequestMapping("insertfriends")
-    public String insertfriend(UserbindTable userbindTable, String name, Model model){
-    userService.insertUserbing(userbindTable,name);
+    public String insertfriend(UserbindTable userbindTable, Model model){
+    userService.insertUserbing(userbindTable);
+        List<UserbindTable> userbindTables = userService.lineUp(userbindTable.getUserName());
+        model.addAttribute("lineup",userbindTables);
+        return "insertfriend";
+    }
+    //删除好友
+    @RequestMapping("deletefriends")
+    public String deletefriend(Integer id,Model model,String name){
+        userService.deleteUserbind(id);
         List<UserbindTable> userbindTables = userService.lineUp(name);
         model.addAttribute("lineup",userbindTables);
-    return "insertfriend";
+        return "insertfriend";
     }
 }
