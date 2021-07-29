@@ -67,5 +67,10 @@ public class UserController {
         model.addAttribute("lineup",userbindTables);
         return "insertfriend";
     }
-    //这是一个测试注释
+    //添加收藏
+    //取消收藏
+    @RequestMapping("openMap")
+    public String openMap(){
+    return "autoSetZoom";
+    }
 }

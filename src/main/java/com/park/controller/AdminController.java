@@ -1,8 +1,10 @@
 package com.park.controller;
 
+import com.park.pojo.DateUtil;
 import com.park.pojo.ParkTable;
 import com.park.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,7 +59,11 @@ public String selectpark(Model model){
     model.addAttribute("parkList",selectpark);
     return "services";
 }
+@Scheduled(fixedRate = 20000)
+    public void inserts(){
+    System.out.println("定时任务时间:"+ DateUtil.getDate(new Date()));
 
+}
 
 
 }
