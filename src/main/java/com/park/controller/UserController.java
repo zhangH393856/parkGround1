@@ -67,5 +67,5 @@ public class UserController {
         model.addAttribute("lineup",userbindTables);
         return "insertfriend";
     }
-    //这是一个测试注释
+    //这是一个测试注释1111
 }
