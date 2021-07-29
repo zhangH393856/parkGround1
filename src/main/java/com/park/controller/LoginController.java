@@ -59,4 +59,10 @@ public class LoginController {
     public  String index(){
         return "contact";
     }
+    @RequestMapping("openservice")
+    public String openservice(Model model){
+        List<ParkTable> selectpark = adminService.selectpark();
+        model.addAttribute("parkList",selectpark);
+        return "services";
+    }
 }

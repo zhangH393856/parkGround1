@@ -69,9 +69,12 @@ public class UserService {
     }
 
     //添加朋友
-    public int insertUserbing(UserbindTable userbindTable, String name) {
-        userbindTable.setUserName(name);
+    public int insertUserbing(UserbindTable userbindTable) {
         return userbindTableMapper.insertSelective(userbindTable);
+    }
+    //删除好友
+    public int deleteUserbind(Integer id){
+        return userbindTableMapper.deleteByPrimaryKey(id);
     }
 
     //用户绑定的朋友信息

@@ -61,10 +61,10 @@
 <section class="w3l-about-breadcrumb text-left">
   <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
     <div class="container py-2">
-      <h2 class="title">登录</h2>
+      <h2 class="title">好友列表</h2>
       <ul class="breadcrumbs-custom-path mt-2">
-        <li><a href="#url">登录</a></li>
-        <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> 主页 </li>
+        <li><a th:href="@{insertfriend(userName=${session.name})}">好友列表</a></li>
+        <li class="active"><a href="/openservice"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> 去主页 </a></li>
       </ul>
     </div>
   </div>
@@ -95,8 +95,9 @@
           </div>
         </div>
         <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
-          <form action="/logins" method="post" class="signin-form">
+          <form action="/insertfriends" method="post" class="signin-form">
             <div class="input-grids">
+              <input name="userName" type="text" th:value="${session.name}">
               <div class="form-group">
                 <input type="text" name="bindName" id="name" placeholder="朋友姓名" class="contact-input" />
               </div>
@@ -120,30 +121,27 @@
 <section class="grids-1 py-5">
   <div class="grids py-lg-5 py-md-4">
     <div class="container">
-      <h3 class="hny-title mb-5">景区</h3>
+      <h3 class="hny-title mb-5">好友列表</h3>
       <div class="row bottom-ab-grids" th:each="park:${lineup}">
         <!--/row-grids-->
         <div class="col-lg-12 subject-card mt-lg-0 mt-12">
           <div class="subject-card-header p-12">
             <p  class="card_title p-lg-4d-block">
             <div class="row align-items-center">
-            <div class="col-sm-6 subject-content mt-sm-0 mt-6" th:each="bind:${lineup}">
 
-            </div>
-            <form action="" method="post" th:each="bind:${lineup}">
-              <input type="checkbox" name="das" value="asdas">123
-              <input type="checkbox" name="das" value="asdas">123
-              <input type="checkbox" name="das" value="asdas">213
+              <div class="col-sm-6 subject-content mt-sm-0 mt-6">
+                  <h4 style="display: inline-block"> 好友姓名：</h4><h4  th:text="${park.bindName}" style="color: #1da1f2;display: inline-block" ></h4>&nbsp;&nbsp;&nbsp;&nbsp;
+                <h4 style="display: inline-block" > 手机号：</h4><h4 th:text="${park.bindPhone}" style="color: #1da1f2;display: inline-block"></h4>
+             </div>
+              <div class="col-sm-2 subject-content mt-sm-0 mt-2">
 
-              <input type="checkbox" name="bindName" ><span th:text="${bind.bindName}"></span>
-            </form>
+                <span>  <button class="btn btn-style btn-primary" style="background-color: #007bff" ><a th:href="@{oneLineup(userName=${park.bindName},parkName=${session.parkName})}">帮他排队</a></button></span> &nbsp;&nbsp;&nbsp;
+                <!--                      <a th:href="@{insertLinepeople(userName=${session.name},parkName=${park.parkName})}"></a>-->
+              </div>
             <div class="col-sm-2 subject-content mt-sm-0 mt-2">
-
-              <button class="btn btn-style btn-primary" style="background-color: #1da1f2" ><a th:href="@{oneLineup(userName=${session.name},parkName=${session.parkName})}">个人排队</a></button></br></br></br>
-
-              <!--                      <a th:href="@{insertLinepeople(userName=${session.name},parkName=${park.parkName})}"></a>-->
+            <span> <button class="btn btn-style btn-primary" style="background-color: goldenrod" ><a th:href="@{deletefriends(name=${park.userName},id=${park.id})}">删除好友</a></button></span></br>
             </div>
-            </div>
+          </div>
             </p>
           </div>
         </div>
